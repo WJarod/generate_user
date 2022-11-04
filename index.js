@@ -10,9 +10,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 var numRequests = 350,
 cur = 0;
-var max = 7200000;     
-var min = 3600000;
-    
+// var max = 7200000;     
+// var min = 3600000;
+var max = 200000;     
+var min = 50000;
+
 function getRandomArbitrary() {
     return (Math.random() * (max - min) + min).toFixed(0);
 }    
@@ -55,18 +57,19 @@ function scheduleRequest() {
                 birth_date: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
                 pseudo: json.results[0].login.username
             }
-            try {
-                request.post({
-                    headers: {'content-type' : 'application/json'},
-                    url:     process.env.USER_URL,
-                    body:    JSON.stringify(data)
-                }, function(error, response, body){
-                    console.log(body);
-                    console.log("User " + cur + " sur " + numRequests + " créé " + format(new Date()) + " à " + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds());
-                });
-            }catch(e){
-                console.log(e);
-            }
+            console.log("User " + cur + " sur " + numRequests + " créé " + format(new Date()) + " à " + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds());
+            // try {
+            //     request.post({
+            //         headers: {'content-type' : 'application/json'},
+            //         url:     process.env.USER_URL,
+            //         body:    JSON.stringify(data)
+            //     }, function(error, response, body){
+            //         console.log(body);
+            //         console.log("User " + cur + " sur " + numRequests + " créé " + format(new Date()) + " à " + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds());
+            //     });
+            // }catch(e){
+            //     console.log(e);
+            // }
         }
     });
 
