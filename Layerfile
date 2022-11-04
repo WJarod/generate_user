@@ -8,5 +8,4 @@ RUN sudo npm install npm@latest -g
 COPY . .
 RUN npm install
 ENV USER_URL=http://34.76.202.156/user
-RUN BACKGROUND node index.js
-EXPOSE WEBSITE http://localhost:1000
+RUN node index.js
