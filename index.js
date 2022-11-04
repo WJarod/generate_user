@@ -10,8 +10,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 var numRequests = 350,
 cur = 0;
-var max = 4000000;     
-var min = 3000000;
+// var max = 4000000;     
+// var min = 3000000;
+var max = 4000;     
+var min = 3000;
 var allEmails = [];
 
 function getRandomArbitrary() {
@@ -56,21 +58,22 @@ function scheduleRequest() {
                 birth_date: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
                 pseudo: json.results[0].login.username
             }
-            try {
-                request.post({
-                    headers: {'content-type' : 'application/json'},
-                    url:     process.env.USER_URL,
-                    body:    JSON.stringify(data)
-                }, function(error, response, body){
-                    console.log("User " + cur +  " sur " + numRequests + " créé " + format(new Date()) + " à " + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds());
-                });
-                allEmails.push(data.mail);
-                if (cur == numRequests) {
-                    console.log("All emails : " + allEmails);
-                }
-            }catch(e){
-                console.log(e);
-            }
+            console.log("User " + cur +  " sur " + numRequests + " créé " + format(new Date()) + " à " + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds());
+            // try {
+            //     request.post({
+            //         headers: {'content-type' : 'application/json'},
+            //         url:     process.env.USER_URL,
+            //         body:    JSON.stringify(data)
+            //     }, function(error, response, body){
+            //         console.log("User " + cur +  " sur " + numRequests + " créé " + format(new Date()) + " à " + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds());
+            //     });
+            //     allEmails.push(data.mail);
+            //     if (cur == numRequests) {
+            //         console.log("All emails : " + allEmails);
+            //     }
+            // }catch(e){
+            //     console.log(e);
+            // }
         }
     });
 
