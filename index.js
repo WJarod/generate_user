@@ -62,7 +62,7 @@ function scheduleRequest() {
                     body:    JSON.stringify(data)
                 }, function(error, response, body){
                     console.log(body);
-                    console.log("User " + cur + " sur " + numRequests + " créé " + format(new Date()));
+                    console.log("User " + cur + " sur " + numRequests + " créé " + format(new Date()) + " à " + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds());
                 });
             }catch(e){
                 console.log(e);
