@@ -7,4 +7,5 @@ RUN sudo npm install npm@latest -g
 
 COPY . .
 RUN npm install
-RUN BACKGROUND node index.js
+ENV USER_URL=http://34.76.202.156/user
+RUN node index.js
