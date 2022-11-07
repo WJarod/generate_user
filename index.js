@@ -49,6 +49,20 @@ function scheduleRequest() {
             var date = new Date(json.results[0].dob.date);
             var name = json.results[0].name.first;
             var lastname = json.results[0].name.last;
+            var pseudo;
+
+            if (getRandomArbitrary() % 2 == 0) {
+                var str = date.getFullYear().toString()
+                pseudo = `${name}_${str.substring(str.indexOf('19') + 2)}`
+            }else if (getRandomArbitrary() % 3 == 0) {
+                var str = date.getFullYear().toString()
+                pseudo = `${name}-${str.substring(str.indexOf('19') + 2)}`
+            }else if (getRandomArbitrary() % 5 == 0) {
+                pseudo = `${name}_${lastname.charAt(0)}${lastname.charAt(1)}`
+            }else {
+                pseudo = `${name}${lastname.charAt(0)}`
+            }    
+
             var data = {
                 name: json.results[0].name.first,
                 firstname: json.results[0].name.last,
@@ -58,7 +72,7 @@ function scheduleRequest() {
                 address: json.results[0].location.city + ', ' + json.results[0].location.country,
                 password: "Dreamoove@34@500@",
                 birth_date: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
-                pseudo: `${name}${lastname.charAt(0)}`,
+                pseudo: pseudo,
             }
             try {
                 request.post({
