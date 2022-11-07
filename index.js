@@ -8,10 +8,10 @@ const app = express();
 app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended: true}));
 
-var numRequests = 350,
+var numRequests = 289,
 cur = 0;
 var max = 4000000;     
-var min = 3000000;
+var min = 2000000;
 // var max = 4000;     
 // var min = 3000;
 var allEmails = [];
@@ -47,16 +47,18 @@ function scheduleRequest() {
         if (!error && response.statusCode == 200) {
             var json = JSON.parse(body);
             var date = new Date(json.results[0].dob.date);
+            var name = json.results[0].name.first;
+            var lastname = json.results[0].name.last;
             var data = {
                 name: json.results[0].name.first,
                 firstname: json.results[0].name.last,
-                mail: `${json.results[0].name.first}.${json.results[0].name.last}.${getRandomArbitrary()}@gmail.com`,
+                mail: `${name}.${lastname}.${getRandomArbitrary()}@gmail.com`,
                 profil_picture: json.results[0].picture.large,
                 tel: json.results[0].phone,
                 address: json.results[0].location.city + ', ' + json.results[0].location.country,
                 password: "Dreamoove@34@500@",
                 birth_date: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
-                pseudo: json.results[0].login.username
+                pseudo: `${name}${lastname.charAt(0)}`,
             }
             try {
                 request.post({
